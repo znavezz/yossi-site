@@ -1,0 +1,267 @@
+/* Yossi's help and privacy pages. One column, phone first; system font; light and dark. */
+
+:root {
+  --bg: #fbfbfd;
+  --surface: #ffffff;
+  --text: #1d1d1f;
+  --muted: #6e6e73;
+  --line: rgba(0, 0, 0, 0.08);
+  --chip: #f2f2f5;
+  --link: #0066cc;
+  --glow: rgba(176, 96, 110, 0.28);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 32px rgba(0, 0, 0, 0.06);
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --surface: #1c1c1e;
+    --text: #f5f5f7;
+    --muted: #a1a1a6;
+    --line: rgba(255, 255, 255, 0.12);
+    --chip: #2c2c2e;
+    --link: #2997ff;
+    --glow: rgba(226, 169, 178, 0.18);
+    --shadow: none;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 17px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Hero */
+
+.hero {
+  text-align: center;
+  padding: clamp(56px, 14vw, 128px) 0 clamp(40px, 9vw, 80px);
+}
+
+.icon {
+  display: block;
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 28px;
+  border-radius: 25px;
+  box-shadow: 0 18px 44px var(--glow);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(44px, 12vw, 80px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.lede {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: clamp(21px, 4.6vw, 28px);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+}
+
+/* Sections */
+
+section {
+  padding-bottom: clamp(48px, 10vw, 88px);
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(28px, 6.4vw, 40px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.intro {
+  margin: 8px 0 24px;
+  color: var(--muted);
+}
+
+.card {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--surface);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+/* Steps */
+
+.steps {
+  counter-reset: step;
+}
+
+.steps li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 16px;
+  padding: 20px;
+}
+
+.steps li + li {
+  border-top: 1px solid var(--line);
+}
+
+.steps li::before {
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--chip);
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.steps h3 {
+  margin: 3px 0 2px;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.steps p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.note {
+  margin: 16px 4px 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* Questions */
+
+details + details {
+  border-top: 1px solid var(--line);
+}
+
+summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+  padding: 14px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::after {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: translateY(-2px) rotate(45deg);
+}
+
+details[open] summary::after {
+  transform: translateY(2px) rotate(-135deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  summary::after {
+    transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1);
+  }
+}
+
+details p {
+  margin: -4px 20px 18px;
+  color: var(--muted);
+}
+
+summary:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Prose (privacy) */
+
+.prose h2 {
+  margin-top: 40px;
+  font-size: clamp(22px, 5vw, 28px);
+}
+
+.prose p,
+.prose li {
+  color: var(--muted);
+}
+
+.prose strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.updated {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* Footer */
+
+footer {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 20px 48px;
+}
+
+footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  color: var(--muted);
+  font-size: 15px;
+}
